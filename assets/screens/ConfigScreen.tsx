@@ -1,13 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { RESTAURANTES } from '../data/restaurantes';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ConfigScreen = () => {
   return (
-    <View style={styles.centerScreen}>
+    <SafeAreaView style={styles.centerScreen}>
       <Ionicons name="settings-outline" size={60} color="#888" />
       <Text style={styles.screenText}>Configuración</Text>
-    </View>
+
+      <View style={styles.chipsContainer}>
+        {RESTAURANTES.map((restaurante) => (
+          <Pressable
+            onPress={() => console.log(restaurante.nombre)
+            }
+            style={styles.chip}
+          >
+            <Text key={restaurante.id}>
+              {restaurante.nombre}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+
+    </SafeAreaView>
   );
 };
 
@@ -23,4 +40,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#64748b',
   },
+  chip: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    backgroundColor: '#e2e8f0',
+    margin: 5,
+  },
+  chipsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  }
 });
